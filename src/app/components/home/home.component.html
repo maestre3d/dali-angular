@@ -1,0 +1,91 @@
+<div class="animated fadeIn">
+  <div id="banner" class="mat-elevation-z8">
+    <h1 style="padding: 0 40px;">Bienvenido, {{identity.name}} {{identity.surname}}!</h1>
+    <div class="container">
+      <div class="card-container animated pulse slow" style="width: 100%;">
+        <mat-card class="card-stats cursor">
+          <mat-card-header class="mat">
+            <mat-card-subtitle><b>VENTAS</b></mat-card-subtitle>
+            <mat-card-title>{{64 | number}}</mat-card-title>
+            <span style="padding-right: 150px;"></span>
+            <span class="example-spacer"></span>
+            <span flex></span>
+            <div class="avatar-stats"><span><mat-icon>shopping_cart</mat-icon></span></div>
+          </mat-card-header>
+          <mat-card-content class="stats">
+            <span style="margin-right: 1px;"><mat-icon>arrow_upward</mat-icon></span>
+            <span> {{1.5 | number:'2.0-2'}}&#37;</span>
+            <span style="font-weight:300; color: #808080; margin-left: 10px;">Desde el último mes.</span>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="card-stats cursor">
+          <mat-card-header class="mat">
+            <mat-card-subtitle><b>CORTES</b></mat-card-subtitle>
+            <mat-card-title>{{38 | number}}</mat-card-title>
+            <span style="padding-right: 150px;"></span>
+            <span class="example-spacer"></span>
+            <span flex></span>
+            <div class="avatar-stats" style="background: #0077c2;"><span><mat-icon>local_offer</mat-icon></span></div>
+          </mat-card-header>
+          <mat-card-content class="stats" style="color: #d32f2f;">
+            <span style="margin-right: 1px;"><mat-icon>arrow_downward</mat-icon></span>
+            <span> {{2.2 | number:'2.0-2'}}&#37;</span>
+            <span style="font-weight:300; color: #808080; margin-left: 10px;">Desde el último mes.</span>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="card-stats cursor">
+          <mat-card-header class="mat">
+            <mat-card-subtitle><b>EXTRAS</b></mat-card-subtitle>
+            <mat-card-title>{{20 |  number}}</mat-card-title>
+            <span style="padding-right: 150px;"></span>
+            <span class="example-spacer"></span>
+            <span flex></span>
+            <div class="avatar-stats" style="background: #9c27b0;"><span><mat-icon>room_service</mat-icon></span></div>
+          </mat-card-header>
+          <mat-card-content class="stats" style="color: #d32f2f;">
+            <span style="margin-right: 1px;"><mat-icon>arrow_downward</mat-icon></span>
+            <span> {{4.705 | number:'2.0-2'}}&#37;</span>
+            <span style="font-weight:300; color: #808080; margin-left: 10px;">Desde el último mes.</span>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <div class="container animated bounceInUp slower delay-3s">
+        <div class="card-container">
+            <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>Agendar Cita</mat-card-title>
+                  <mat-card-subtitle>Añada una nueva cita a su agenda</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="assets/img/fb-1.jpg" alt="Photo of a date" >
+        
+                <mat-card-actions>
+                  <button class="teal-btn" mat-raised-button color="accent" routerLink="/dates/new">AGENDAR</button>
+                  <button mat-button routerLink="/dates">MIS CITAS</button>
+                </mat-card-actions>
+              </mat-card>
+              <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>Vender Producto(s)</mat-card-title>
+                  <mat-card-subtitle>Realize una venta de productos {{company}}&trade;</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="assets/img/product-1.jpg" alt="Photo of a sale">
+                <mat-card-actions>
+                  <button class="teal-btn" mat-raised-button color="accent" routerLink="store/sell">VENDER</button>
+                  <button mat-button routerLink="store">MIS VENTAS</button>
+                </mat-card-actions>
+              </mat-card>
+              <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>Inventario</mat-card-title>
+                  <mat-card-subtitle>Observe el stock disponible en tiempo real.</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="assets/img/banner-1.jpg" alt="Company photo" >
+                <mat-card-actions>
+                  <a routerLink="/warehouse"><button class="teal-btn" mat-raised-button color="accent">VER STOCK</button></a>
+                </mat-card-actions>
+              </mat-card>
+          </div>
+      </div>
+  </div>
+</div>

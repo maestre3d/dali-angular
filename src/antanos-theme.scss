@@ -1,0 +1,94 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$mat-premiere: (
+  50: #eceff1,
+  100: #cfd8dc,
+  200: #b0bec5,
+  300: #90a4ae,
+  400: #78909c,
+  500: #263238,
+  600: #546e7a,
+  700: #455a64,
+  800: #37474f,
+  900: #263238,
+  A100: #cfd8dc,
+  A200: #b0bec5,
+  A400: #78909c,
+  A700: #455a64,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$mat-android: (
+  50: #e0f2f1,
+  100: #b2dfdb,
+  200: #80cbc4,
+  300: #4db6ac,
+  400: #26a69a,
+  500: #009688,
+  600: #00897b,
+  700: #00796b,
+  800: #00695c,
+  900: #004d40,
+  A100: #a7ffeb,
+  A200: #64ffda,
+  A400: #1de9b6,
+  A700: #00bfa5,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $dark-primary-text,
+  )
+);
+
+$antanos-primary: mat-palette($mat-premiere);
+$antanos-accent:  mat-palette($mat-android, A700, A400, A700);
+$antanos-warn:    mat-palette($mat-red);
+$antanos-theme: mat-light-theme($antanos-primary, $antanos-accent, $antanos-warn);
+
+@include angular-material-theme($antanos-theme);
+
+.dark-theme {
+  color: $light-primary-text;
+  $antanos-primary: mat-palette($mat-premiere);
+  $antanos-accent:  mat-palette($mat-android, A700, A400, A700);
+  $antanos-warn:    mat-palette($mat-red);
+  $antanos-dark-theme: mat-dark-theme($antanos-primary, $antanos-accent, $antanos-warn);
+
+  @include angular-material-theme($antanos-dark-theme);
+}
+
+.inverted-primary {
+  $inverted-primary: mat-palette($mat-android, A700, A400, A700);
+  $inverted-accent:  mat-palette($mat-premiere, A700, A400, A700);
+  $inverted-warn:    mat-palette($mat-red);
+  $inverted-theme: mat-light-theme($inverted-primary, $inverted-accent, $inverted-warn);
+
+  @include angular-material-theme($inverted-theme);
+}

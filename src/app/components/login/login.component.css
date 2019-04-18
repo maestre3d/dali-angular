@@ -1,0 +1,27 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .example-container > * {
+    margin: 25px;
+    
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(#263238, #2C5364);
+    height: 100%;
+    vertical-align: 50%;
+  }
+
+  .card-container {
+    width: 400px;
+    max-width: 400px;
+    height: 500px;
+    margin: 25px;
+    border-radius: 40px;
+  }

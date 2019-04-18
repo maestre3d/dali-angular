@@ -1,0 +1,127 @@
+<div class="container animated fadeIn fast">
+  <mat-tab-group color="accent">
+    <mat-tab label="Citas">
+      <ng-template matTabContent>
+        <div class="header">
+          <h1>Citas</h1>
+          <button mat-raised-button routerLink="new" ><mat-icon matPreffix>add</mat-icon> CITA</button>
+        </div>
+        <mat-divider [vertical]="false"></mat-divider>
+        <div class="content animated bounceInUp slow">
+          <div>
+            <h3>Activo</h3>
+            <div class="card-container">
+              <mat-card class="card">
+                <mat-card-title>Luis Alonso Ruiz</mat-card-title>
+                <mat-card-subtitle style="display: flex; flex-flow:row wrap; align-items:center;">
+                  <div>Corte Cabello - 03:45 P.M.</div>
+                  <div><mat-icon style="font-size: 19px;">watch_later</mat-icon></div>
+                </mat-card-subtitle>
+                <mat-card-content class="card-content">
+                </mat-card-content>
+                <mat-card-actions style="display: flex; justify-content:flex-end;">
+                  <button mat-raised-button>CANCELAR</button>
+                  <button mat-raised-button color="accent" class="teal-btn" (click)="openDialog('Finalizar Cita', '¿Desea Finalizar la cita?')" ><mat-icon>done_all</mat-icon> FINALIZAR</button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+          </div>
+          <div>
+            <h3>Pendientes</h3>
+            <div class="card-container">
+              <mat-card class="card">
+                <mat-card-title>Fernando Ruelas</mat-card-title>
+                <mat-card-subtitle style="display: flex; flex-flow:row wrap; align-items:center;">
+                  <div>Corte Cabello, Corte Barba - 05:10 P.M.</div>
+                  <div><mat-icon style="font-size: 19px;">watch_later</mat-icon></div>
+                </mat-card-subtitle>
+                <mat-card-content class="card-content">
+                </mat-card-content>
+                <mat-card-actions style="display: flex; justify-content:flex-end;">
+                  <button mat-raised-button>CANCELAR</button>
+                  <button mat-raised-button><mat-icon matPreffix>arrow_right_alt</mat-icon> COMENZAR</button>
+                </mat-card-actions>
+              </mat-card>
+              <mat-card class="card">
+                <mat-card-title>Alan Valerio</mat-card-title>
+                <mat-card-subtitle style="display: flex; flex-flow:row wrap; align-items:center;">
+                  <div>Corte Cabello, Tratamiento Facial - 05:40 P.M.</div>
+                  <div><mat-icon style="font-size: 19px;">watch_later</mat-icon></div>
+                </mat-card-subtitle>
+                <mat-card-content class="card-content">
+                </mat-card-content>
+                <mat-card-actions style="display: flex; justify-content:flex-end;">
+                  <button mat-raised-button>CANCELAR</button>
+                  <button mat-raised-button><mat-icon matPreffix>arrow_right_alt</mat-icon> COMENZAR</button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Historial" (click)="loadTable">
+      <ng-template matTabContent>
+        <div class="header">
+          <h1>Historial</h1>
+          <div>
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
+                <span>Hoy</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>voicemail</mat-icon>
+                <span>Semana</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>notifications_off</mat-icon>
+                <span>Mes</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+        <mat-divider [vertical]="false" style="margin-bottom: 10px;"></mat-divider>
+        <div class="tb-1">
+            <mat-form-field color="accent" style="width: 50%;" >
+              <mat-label>Buscar</mat-label>
+              <input matInput (keyup)="applyFilter(value)" placeholder="Buscar cita(s)..." [(ngModel)]="value">
+              <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="applyClear()">
+                <mat-icon>close</mat-icon>
+              </button>
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+          </div> 
+          <div class="mat-elevation-z8 animated bounceInUp slow">
+            <table mat-table matSort [dataSource]="dataSource">
+          
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+          
+              <!-- Services Column -->
+              <ng-container matColumnDef="services">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Servicios </th>
+                <td mat-cell *matCellDef="let element"> {{element.services}} </td>
+              </ng-container>
+      
+              <!-- Cost Column -->
+              <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                <td mat-cell *matCellDef="let element"> {{element.date * 1000 | date:'short'}} </td>
+              </ng-container>
+              
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

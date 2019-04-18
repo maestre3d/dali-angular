@@ -1,0 +1,64 @@
+<div class="animated fadeIn">
+  <div class="hd-cont mat-elevation-z8">
+      <div class="header">
+          <img src="assets/img/default-user.png" alt="Profile pic" class="mat-elevation-z8">
+          <h1>{{ identity.name }} {{ identity.surname }}</h1>
+      </div>
+  </div>
+  <div class="container animated pulse slower">
+    <mat-card class="pf-table">
+      <mat-card-title>Estadísticas</mat-card-title>
+      <mat-card-content>
+          <mat-tab-group color="accent">
+              <mat-tab label="Semanal">
+                <ng-template matTabContent>
+                  Content 1 - Loaded: {{getTimeLoaded(1) | date:'medium'}}
+                  <app-bar-chart></app-bar-chart>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Mensual">
+                <ng-template matTabContent>
+                  Content 2 - Loaded: {{getTimeLoaded(2) | date:'medium'}}
+                  <app-radar-chart></app-radar-chart>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Anual">
+                <ng-template matTabContent>
+                  Content 3 - Loaded: {{getTimeLoaded(3) | date:'medium'}}
+                  <app-line-chart></app-line-chart>
+                </ng-template>
+              </mat-tab>
+            </mat-tab-group>
+            
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="pf-container">
+      <mat-card-title>Perfil</mat-card-title>
+      <mat-card-content>
+        <div class="" style="display: flex; flex-flow: column wrap;">
+          <div style="display:flex; flex-flow:row wrap; justify-content: space-between; align-items: baseline;">
+            <h4 class="pf-h4">Nombre</h4>
+            <p style="margin-left: 20px;">{{identity.name}}</p>
+          </div>
+          <div style="display:flex; flex-flow:row wrap; justify-content: space-between; align-items: baseline;">
+            <h4 class="pf-h4">Apellido</h4>
+            <p style="margin-left: 20px;">{{identity.surname}}</p>
+          </div>
+          <div style="display:flex; flex-flow:row wrap; justify-content: space-between; align-items: baseline;">
+            <h4 class="pf-h4">Username</h4>
+            <p style="margin-left: 20px;">{{identity.username}}</p>
+          </div>
+          <div style="display:flex; flex-flow:row wrap; justify-content: space-between; align-items: baseline;">
+            <h4 class="pf-h4">Foto</h4>
+            <p style="margin-left: 20px;"><button mat-raised-button (click)="openBottomSheet()">Abrir archivo</button></p>
+          </div>
+          <h2>Misc</h2>
+          <div style="display:flex; flex-flow:row wrap; justify-content: space-between; align-items: baseline;">
+            <h4 class="pf-h4">Dark Mode</h4>
+            <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)"></mat-slide-toggle>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

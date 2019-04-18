@@ -1,0 +1,32 @@
+.container {
+    padding: 20px 40px;
+}
+
+.header {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+.form-content{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    padding: 10px;
+
+}
+
+.form-single{
+    padding: 0 10px;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected {
+    color: #fff!important;
+ }

@@ -1,0 +1,45 @@
+.wrapper {
+    padding: 10px 25px;
+}
+
+.container {
+    margin: 10px;
+}
+
+.header {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+.form-content{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    padding: 10px;
+
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected {
+    color: #fff!important;
+ }
+
+ table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  th.mat-sort-header-sorted {
+    color: black;
+  }

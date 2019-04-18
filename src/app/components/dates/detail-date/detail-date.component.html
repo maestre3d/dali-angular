@@ -1,0 +1,74 @@
+<div class="container animated fadeIn">
+  <div class="header">
+    <h1>Nueva Cita</h1>
+  </div>
+  <mat-divider [vertical]="false"></mat-divider>
+  <div class="inverted-primary animated pulse slow">
+    <mat-horizontal-stepper [linear]="isLinear" #stepper style="background: rgba(0,0,0,0);">
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Datos</ng-template>
+          <div class="content">
+            <div class="form-content" style="margin-right: 25px;">
+              <h2>Datos del cliente</h2>
+              <mat-form-field class="form-single" appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Nombre del cliente" formControlName="firstCtrl" required >
+              </mat-form-field>
+              <mat-form-field class="form-single" appearance="outline">
+                <mat-label>Apellido</mat-label>
+                <input matInput placeholder="Apellido del cliente" formControlName="secondCtrl" required >
+              </mat-form-field>
+            </div>
+            <div class="form-content" style="margin-bottom: 40px;">
+              <h2>Seleccione hora</h2>
+              <mat-form-field class="form-single">
+                <mat-label>Hora</mat-label>
+                <mat-select required formControlName="thirdCtrl">
+                  <mat-option *ngFor="let hour of hours" [value]="hour.value">
+                    {{hour.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div>
+            <button mat-raised-button matStepperNext>SIGUIENTE</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Servicios</ng-template>
+          <div class="content" style=" margin-bottom: 25px;">
+            <div class="form-content">
+              <h2>Seleccione los servicios</h2>
+              <div>
+                <mat-checkbox [(ngModel)]="cc" color="primary" style="margin: 10px 25px;" [ngModelOptions]="{standalone: true}" > Corte de Cabello</mat-checkbox>
+                <mat-checkbox  [(ngModel)]="cb" color="primary" style="margin: 10px 25px;" [ngModelOptions]="{standalone: true}"> Corte de Barba</mat-checkbox>
+                <mat-checkbox  [(ngModel)]="tf" color="primary" style="margin: 10px 25px;" [ngModelOptions]="{standalone: true}"> Tratamiento Facial</mat-checkbox>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious>ATRÁS</button>
+            <button mat-raised-button matStepperNext>SIGUIENTE</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Listo</ng-template>
+        <div class="finished">
+          <h2>Ha terminado.</h2>
+        </div>
+        <div>
+          <p style="color:#808080;">Verifique los datos antes de agendar una cita.</p>
+        </div>
+        <div>
+          <button mat-button (click)="stepper.reset()">CANCELAR</button>
+          <button mat-raised-button color="primary" class="teal-btn" (click)="openSnackBar('Cita agendada correctamente.')">TERMINAR</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>

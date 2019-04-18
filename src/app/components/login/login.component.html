@@ -1,0 +1,18 @@
+<div class="container">
+  <mat-card class="card-container">
+    <mat-card-content>
+      <div class="example-container">
+        <img src="assets/img/antanos-sm1.png" alt="company-logo" height="150" width="200" >
+        <mat-form-field hintLabel="Max 10 caracteres" color="accent">
+          <input matInput #input maxlength="10" placeholder="Introduzca su nombre de usuario" [(ngModel)]="userInput">
+          <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+        </mat-form-field>
+        <mat-form-field color="accent">
+          <input matInput #pass placeholder="Introduzca su contraseña" [type]="!hide ? 'password' : 'text'" [(ngModel)]="passInput">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+        <button mat-raised-button (click)="getLogged()">INICIAR SESIÓN</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

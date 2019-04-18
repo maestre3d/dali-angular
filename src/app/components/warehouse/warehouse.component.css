@@ -1,0 +1,34 @@
+table {
+    width: 100%;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+  .mat-table-sticky:last-child {
+    border-left: 1px solid #e0e0e0;
+  }
+
+  td.mat-column-admin {
+    width: 20px;
+    padding-right: 8px;
+  }
+  
+  th.mat-column-position, td.mat-column-position {
+    padding-left: 8px;
+  }
+
+  .container {
+    padding: 25px;
+  }
+
+  .tb-1 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }

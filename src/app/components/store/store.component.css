@@ -1,0 +1,27 @@
+.wrapper {
+    padding: 10px 25px;
+}
+
+.header {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container {
+    margin: 15px;
+}
+
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  th.mat-sort-header-sorted {
+    color: black;
+  }

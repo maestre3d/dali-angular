@@ -1,0 +1,61 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav mat-elevation-z8" fixedInViewport="true"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="!(isHandset$ | async)"
+      fxLayoutAlign="space-between center">
+    <mat-toolbar  style="background-image: linear-gradient(#263238, #2C5364)!important;">
+      <div class="profile-container">
+        <a routerLink="config"><img class="mat-elevation-z8" src="assets/img/default-user.png" alt="" height="64" style="border: 2.5px solid #fff; backface-visibility: hidden;border-radius: 100px;"></a>
+        <a routerLink="config" style="text-decoration:none; color: #fff;" ><h2>{{identity.name}}</h2></a>
+      </div>
+    </mat-toolbar>
+    <mat-divider [vertical]="false"></mat-divider>
+    <mat-nav-list>
+      <a mat-list-item routerLink="home" routerLinkActive="active" ><mat-icon>home</mat-icon> Home</a>
+      <a mat-list-item routerLink="dates" routerLinkActive="active" ><mat-icon>receipt</mat-icon> Citas</a>
+      <a mat-list-item routerLink="store" routerLinkActive="active" ><mat-icon>shopping_cart</mat-icon> Ventas</a>
+      <a mat-list-item routerLink="warehouse" routerLinkActive="active" ><mat-icon>view_quilt</mat-icon> Inventario</a>
+    </mat-nav-list>
+    <mat-nav-list style="bottom : 0; width: 250px; position:fixed;">
+      <mat-divider [vertical]="false"></mat-divider>
+      <a mat-list-item routerLink="config" routerLinkActive="active" ><mat-icon>settings</mat-icon> Configuración</a>
+      <a mat-list-item (click)="logout()" routerLinkActive="active" style="background: #d32f2f; font-weight: 700; color: #fff; justify-content: space-evenly;" ><mat-icon>power_settings_new</mat-icon> Salir</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <a routerLink="home" id="brand"><span><img src="assets/img/antanos-sm2.png" alt="" height="90" width="120"></span></a>
+      <span class="example-spacer"></span>
+	    <span flex></span>
+      <div class="profile-containerban">
+        <button mat-button [matMenuTriggerFor]="menu">
+          <img src="assets/img/default-user.png" alt="" class="mat-elevation-z8" height="48" style="border: 2.5px solid #fff; border-radius: 100px; float: left;" >
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="config">
+              <mat-icon>account_circle</mat-icon>
+              <span style="text-decoration: none;">{{identity.name}}</span>
+            </button>
+            <button mat-menu-item routerLink="dates">
+              <mat-icon>local_offer</mat-icon>
+              <span>Mis servicios</span>
+            </button>
+            <button mat-menu-item routerLink="store">
+              <mat-icon>shopping_cart</mat-icon>
+              <span>Mis ventas</span>
+            </button>
+          </mat-menu>
+      </div>
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
