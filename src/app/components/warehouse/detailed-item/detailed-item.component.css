@@ -4,4 +4,7 @@
 
 .container {
     padding: 10px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
 }

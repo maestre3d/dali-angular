@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  hide: boolean;
   userInput: string;
   passInput: string;
   token: string;
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private snackBar: MatSnackBar, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
+    this.hide = false;
   }
 
   getLogged() {

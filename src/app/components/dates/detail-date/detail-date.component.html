@@ -13,11 +13,11 @@
               <h2>Datos del cliente</h2>
               <mat-form-field class="form-single" appearance="outline">
                 <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Nombre del cliente" formControlName="firstCtrl" required >
+                <input  matInput placeholder="Nombre del cliente" formControlName="firstCtrl" required >
               </mat-form-field>
-              <mat-form-field class="form-single" appearance="outline">
+              <mat-form-field class="form-single" appearance="outline" >
                 <mat-label>Apellido</mat-label>
-                <input matInput placeholder="Apellido del cliente" formControlName="secondCtrl" required >
+                <input  matInput placeholder="Apellido del cliente" formControlName="secondCtrl" required >
               </mat-form-field>
             </div>
             <div class="form-content" style="margin-bottom: 40px;">
@@ -44,9 +44,7 @@
             <div class="form-content">
               <h2>Seleccione los servicios</h2>
               <div>
-                <mat-checkbox [(ngModel)]="cc" color="primary" style="margin: 10px 25px;" [ngModelOptions]="{standalone: true}" > Corte de Cabello</mat-checkbox>
-                <mat-checkbox  [(ngModel)]="cb" color="primary" style="margin: 10px 25px;" [ngModelOptions]="{standalone: true}"> Corte de Barba</mat-checkbox>
-                <mat-checkbox  [(ngModel)]="tf" color="primary" style="margin: 10px 25px;" [ngModelOptions]="{standalone: true}"> Tratamiento Facial</mat-checkbox>
+                <mat-checkbox *ngFor="let service of services" [(ngModel)]="service.flag" color="primary" style="margin: 10px 25px;" [ngModelOptions]="{standalone: true}" >{{service.name}}</mat-checkbox>
               </div>
             </div>
           </div>
@@ -66,7 +64,7 @@
         </div>
         <div>
           <button mat-button (click)="stepper.reset()">CANCELAR</button>
-          <button mat-raised-button color="primary" class="teal-btn" (click)="openSnackBar('Cita agendada correctamente.')">TERMINAR</button>
+          <button mat-raised-button color="primary" class="teal-btn" (click)="onSubmit()" [disabled]="CheckServices() === true">TERMINAR</button>
         </div>
       </mat-step>
     </mat-horizontal-stepper>

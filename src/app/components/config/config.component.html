@@ -1,7 +1,7 @@
 <div class="animated fadeIn">
   <div class="hd-cont mat-elevation-z8">
       <div class="header">
-          <img src="assets/img/default-user.png" alt="Profile pic" class="mat-elevation-z8">
+          <img [src]="identity.image | noimage" alt="Profile pic" class="mat-elevation-z8">
           <h1>{{ identity.name }} {{ identity.surname }}</h1>
       </div>
   </div>

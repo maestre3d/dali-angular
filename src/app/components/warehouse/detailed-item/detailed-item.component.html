@@ -3,6 +3,24 @@
   <h1 *ngIf="item">{{item.name}}</h1>
   <mat-divider></mat-divider>
   <div class="container animated pulse">
+    <form class="container" #formItem="ngForm" (ngSubmit)="onSubmit()">
+        <mat-form-field color="accent" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre" [(ngModel)]="item.name" #name="ngModel" required [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+          <mat-form-field color="accent" appearance="outline">
+            <mat-label>Marca</mat-label>
+            <input matInput placeholder="Marca" #brand="ngModel" [(ngModel)]="item.brand" required [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+      
+          <mat-form-field color="accent" appearance="outline">
+            <mat-label>Precio</mat-label>
+            <input matInput placeholder="Precio" class="example-right-align" #price="ngModel" [(ngModel)]="item.price" required [ngModelOptions]="{standalone: true}">
+            <span matPrefix>$&nbsp;</span>
+            <span matSuffix>.00</span>
+          </mat-form-field>
 
+          <button mat-raised-button type="submit" [disabled]="!formItem.form.valid">GUARDAR</button>
+    </form>
   </div>
 </div>

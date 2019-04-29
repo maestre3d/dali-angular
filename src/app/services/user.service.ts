@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
+
 @Injectable({
     providedIn: 'root'
 })
@@ -15,6 +16,14 @@ export class UserService {
         this.url = GLOBAL.url;
     }
 
+    getQuery(query: string) {
+        const url = `${GLOBAL.url}/${query}`;
+        const headers = new HttpHeaders({
+            'Authorization': this.getToken()
+        });
+        return this.http.get(url, {headers});
+    }
+
     logIn(user: any, getToken?: string) {
         if ( getToken ) {
             user.getToken = getToken;
@@ -23,7 +32,7 @@ export class UserService {
         const params = json;
         const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-        return this.http.post(this.url + 'login', params, {headers})
+        return this.http.post(this.url + '/login', params, {headers})
                     .pipe(map(res => res ));
     }
 
@@ -49,6 +58,16 @@ export class UserService {
         }
 
         return this.token;
+    }
+
+    getDatesHistory(id: string) {
+        return this.getQuery(`user/booking/history/?user=${id}`)
+                    .pipe(map(data => data));
+    }
+
+    getActiveBooks(username: string){
+        return this.getQuery(`/user/booking/${username}`)
+                    .pipe(map(data => data));
     }
 
 }

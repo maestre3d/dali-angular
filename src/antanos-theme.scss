@@ -67,8 +67,8 @@ $mat-android: (
   )
 );
 
-$antanos-primary: mat-palette($mat-premiere);
-$antanos-accent:  mat-palette($mat-android, A700, A400, A700);
+$antanos-primary: mat-palette($mat-blue, 800);
+$antanos-accent:  mat-palette($mat-blue, A200, A400, A700);
 $antanos-warn:    mat-palette($mat-red);
 $antanos-theme: mat-light-theme($antanos-primary, $antanos-accent, $antanos-warn);
 
@@ -76,8 +76,8 @@ $antanos-theme: mat-light-theme($antanos-primary, $antanos-accent, $antanos-warn
 
 .dark-theme {
   color: $light-primary-text;
-  $antanos-primary: mat-palette($mat-premiere);
-  $antanos-accent:  mat-palette($mat-android, A700, A400, A700);
+  $antanos-primary: mat-palette($mat-blue, 800);
+  $antanos-accent:  mat-palette($mat-indigo, A200, A400, A700);
   $antanos-warn:    mat-palette($mat-red);
   $antanos-dark-theme: mat-dark-theme($antanos-primary, $antanos-accent, $antanos-warn);
 
@@ -85,8 +85,8 @@ $antanos-theme: mat-light-theme($antanos-primary, $antanos-accent, $antanos-warn
 }
 
 .inverted-primary {
-  $inverted-primary: mat-palette($mat-android, A700, A400, A700);
-  $inverted-accent:  mat-palette($mat-premiere, A700, A400, A700);
+  $inverted-primary: mat-palette($mat-indigo, A200, A400, A700);
+  $inverted-accent:  mat-palette($mat-blue, 800);
   $inverted-warn:    mat-palette($mat-red);
   $inverted-theme: mat-light-theme($inverted-primary, $inverted-accent, $inverted-warn);
 

@@ -7,9 +7,11 @@ export class NoimagePipe implements PipeTransform {
 
 
   transform(image: any): string {
-    if ( !image) {
+    if ( !image ) {
       return 'assets/img/default-user.png';
     }
+
+    return image;
 }
 
 }

@@ -1,30 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {SelectionModel} from '@angular/cdk/collections';
-import {MatPaginator, MatTableDataSource, MatSort, MatDialog} from '@angular/material';
+import {MatPaginator, MatTableDataSource, MatSort, MatDialog, MatSnackBar} from '@angular/material';
 import { DialogComponent } from '../shared/dialog.component';
 import { Router } from '@angular/router';
-
-/* TEMP */
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  services: string;
-  date: number;
-}
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Jorge Carlos', services: 'CC', date: 1554941484 },
-  {position: 2, name: 'Giovanni Luca', services: 'CC', date: 1554941484 },
-  {position: 3, name: 'Fernando Estrada', services: 'CC', date: 1554931484 },
-  {position: 4, name: 'Hiram Munoz', services: 'CB', date: 1554941484 },
-  {position: 5, name: 'Luis Alonso Ruiz', services: 'CC, CB', date: 1554941480 },
-  {position: 6, name: 'Gerardo Martinez', services: 'TF', date: 1554941484 },
-  {position: 7, name: 'Jonathan Estrada', services: 'CC', date: 1554941484 },
-  {position: 8, name: 'Miguel Ruiz', services: 'CB', date: 1554941484 },
-  {position: 9, name: 'Lionel Messi', services: 'CC', date: 1554941484 },
-  {position: 10, name: 'Juan Carlos Lopez', services: 'TF', date: 1554941484 }
-];
-
-/*  END TEMP */
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
+import { Appoint } from 'src/app/models/appoint';
+import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
   selector: 'app-dates',
@@ -32,12 +14,15 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./dates.component.css']
 })
 export class DatesComponent implements OnInit {
-  tabLoadTimes: Date[] = [];
+  identity: User;
+  appoints: Appoint[] = [];
+  actives: Appoint[] = [];
+  loading = false;
 
   // TABLE Stuff
   displayedColumns: string[] = ['name', 'services', 'date'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  selection = new SelectionModel<PeriodicElement>(true, []);
+  dataSource = new MatTableDataSource<Appoint>(this.appoints);
+  selection = new SelectionModel<Appoint>(true, []);
 
   value: string;
 
@@ -49,7 +34,36 @@ export class DatesComponent implements OnInit {
   title: string;
   content: string;
 
-  constructor(public dialog: MatDialog, private router: Router) {
+  constructor(public dialog: MatDialog,
+              private snackBar: MatSnackBar,
+              private router: Router, private userService: UserService, private servicesService: ServicesService) {
+    this.identity = userService.getIdentity();
+    // Load main page / actives
+    this.loading = true;
+    this.userService.getActiveBooks(this.identity.username).subscribe((data: any) => {
+      data.appoints.forEach(element => {
+        this.loading = false;
+        this.actives.push(element);
+      });
+    }, err => {
+      if (err) {
+        this.openSnackBar(err.error.message);
+      }
+    });
+    // Load history
+    this.userService.getDatesHistory(this.identity._id)
+        .subscribe( (data: any) => {
+          data.appoints.forEach(element => {
+            this.appoints.push(element);
+          });
+        }, err => {
+          if (err) {
+            this.openSnackBar(err.error.message);
+          }
+        });
+
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ngOnInit() {
@@ -78,16 +92,35 @@ export class DatesComponent implements OnInit {
     this.applyFilter(this.value);
   }
 
-  getTimeLoaded(index: number) {
-    if (!this.tabLoadTimes[index]) {
-      this.tabLoadTimes[index] = new Date();
-    }
+  deleteBook(book: string) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {title:'Borrar Cita', flag: this.flag, content: '¿Desea Eliminar la cita?' }
+    });
 
-    return this.tabLoadTimes[index];
+    dialogRef.afterClosed().subscribe(result => {
+      this.flag = result;
+      console.log(result);
+
+      if(!result) {
+        this.servicesService.deleteBook(book).subscribe((data) => {
+          this.openSnackBar('La Cita ha sido eliminada.');
+          this.router.navigate(['/dates']);
+        }, err => {
+          if (err) {
+            this.openSnackBar(err.error.message);
+          }
+        });
+      }
+    });
+
   }
 
-  loadTable() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  openSnackBar(message: string, action?: string) {
+    message = `${message}`;
+    action = 'OK';
+    this.snackBar.open(message, action, {
+      duration: 10000,
+    });
   }
+
 }

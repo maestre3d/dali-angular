@@ -4,9 +4,9 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!(isHandset$ | async)"
       fxLayoutAlign="space-between center">
-    <mat-toolbar  style="background-image: linear-gradient(#263238, #2C5364)!important;">
+    <mat-toolbar  style="background-image: linear-gradient(#1976d2, #0d47a1)!important;">
       <div class="profile-container">
-        <a routerLink="config"><img class="mat-elevation-z8" src="assets/img/default-user.png" alt="" height="64" style="border: 2.5px solid #fff; backface-visibility: hidden;border-radius: 100px;"></a>
+        <a routerLink="config"><img [src]="identity.image | noimage" alt="" height="64" width="64" class="mat-elevation-z8" style="border: 2.5px solid #fff; backface-visibility: hidden;border-radius: 100px;"></a>
         <a routerLink="config" style="text-decoration:none; color: #fff;" ><h2>{{identity.name}}</h2></a>
       </div>
     </mat-toolbar>
@@ -37,8 +37,8 @@
       <span class="example-spacer"></span>
 	    <span flex></span>
       <div class="profile-containerban">
-        <button mat-button [matMenuTriggerFor]="menu">
-          <img src="assets/img/default-user.png" alt="" class="mat-elevation-z8" height="48" style="border: 2.5px solid #fff; border-radius: 100px; float: left;" >
+        <button mat-button [matMenuTriggerFor]="menu" style="border-radius: 100px;">
+          <img [src]="identity.image | noimage" alt="" height="48" width="48" class="mat-elevation-z8" style="border: 2.5px solid #fff; border-radius: 100px; float: left;" >
         </button>
         <mat-menu #menu="matMenu">
             <button mat-menu-item routerLink="config">
@@ -52,6 +52,10 @@
             <button mat-menu-item routerLink="store">
               <mat-icon>shopping_cart</mat-icon>
               <span>Mis ventas</span>
+            </button>
+            <button (click)="logout()" mat-menu-item style="background: #d32f2f; font-weight: 700; color: #fff;">
+              <mat-icon style="color: #fff;">power_settings_new</mat-icon>
+              <span>Salir</span>
             </button>
           </mat-menu>
       </div>

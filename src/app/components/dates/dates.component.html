@@ -14,7 +14,7 @@
               <mat-card class="card">
                 <mat-card-title>Luis Alonso Ruiz</mat-card-title>
                 <mat-card-subtitle style="display: flex; flex-flow:row wrap; align-items:center;">
-                  <div>Corte Cabello - 03:45 P.M.</div>
+                  <div><span>Corte Cabello</span> - 10:30 AM</div>
                   <div><mat-icon style="font-size: 19px;">watch_later</mat-icon></div>
                 </mat-card-subtitle>
                 <mat-card-content class="card-content">
@@ -28,30 +28,19 @@
           </div>
           <div>
             <h3>Pendientes</h3>
+            <app-loading *ngIf="loading === true"></app-loading>
             <div class="card-container">
-              <mat-card class="card">
-                <mat-card-title>Fernando Ruelas</mat-card-title>
+              
+              <mat-card class="card"  *ngFor="let book of appoints">
+                <mat-card-title>{{book.costumer}}</mat-card-title>
                 <mat-card-subtitle style="display: flex; flex-flow:row wrap; align-items:center;">
-                  <div>Corte Cabello, Corte Barba - 05:10 P.M.</div>
+                  <div><span *ngFor="let service of book.services">{{service.name}} <span *ngIf="book.services.length > 1"> , </span></span> - {{book.time | date:'short'}}</div>
                   <div><mat-icon style="font-size: 19px;">watch_later</mat-icon></div>
                 </mat-card-subtitle>
                 <mat-card-content class="card-content">
                 </mat-card-content>
                 <mat-card-actions style="display: flex; justify-content:flex-end;">
-                  <button mat-raised-button>CANCELAR</button>
-                  <button mat-raised-button><mat-icon matPreffix>arrow_right_alt</mat-icon> COMENZAR</button>
-                </mat-card-actions>
-              </mat-card>
-              <mat-card class="card">
-                <mat-card-title>Alan Valerio</mat-card-title>
-                <mat-card-subtitle style="display: flex; flex-flow:row wrap; align-items:center;">
-                  <div>Corte Cabello, Tratamiento Facial - 05:40 P.M.</div>
-                  <div><mat-icon style="font-size: 19px;">watch_later</mat-icon></div>
-                </mat-card-subtitle>
-                <mat-card-content class="card-content">
-                </mat-card-content>
-                <mat-card-actions style="display: flex; justify-content:flex-end;">
-                  <button mat-raised-button>CANCELAR</button>
+                  <button mat-raised-button (click)="deleteBook(book._id)">CANCELAR</button>
                   <button mat-raised-button><mat-icon matPreffix>arrow_right_alt</mat-icon> COMENZAR</button>
                 </mat-card-actions>
               </mat-card>
@@ -60,28 +49,11 @@
         </div>
       </ng-template>
     </mat-tab>
-    <mat-tab label="Historial" (click)="loadTable">
+    <mat-tab label="Historial">
       <ng-template matTabContent>
         <div class="header">
           <h1>Historial</h1>
           <div>
-            <button mat-icon-button [matMenuTriggerFor]="menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>dialpad</mat-icon>
-                <span>Hoy</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>voicemail</mat-icon>
-                <span>Semana</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>notifications_off</mat-icon>
-                <span>Mes</span>
-              </button>
-            </mat-menu>
           </div>
         </div>
         <mat-divider [vertical]="false" style="margin-bottom: 10px;"></mat-divider>
@@ -101,19 +73,19 @@
               <!-- Name Column -->
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.costumer}} </td>
               </ng-container>
           
               <!-- Services Column -->
               <ng-container matColumnDef="services">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Servicios </th>
-                <td mat-cell *matCellDef="let element"> {{element.services}} </td>
+                <td mat-cell *matCellDef="let element"> <span *ngFor="let service of element.services">{{service.name}}, </span> </td>
               </ng-container>
       
               <!-- Cost Column -->
               <ng-container matColumnDef="date">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
-                <td mat-cell *matCellDef="let element"> {{element.date * 1000 | date:'short'}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.time | date:'short'}} </td>
               </ng-container>
               
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -28,6 +28,7 @@ import { StoreComponent } from './components/store/store.component';
 import { SalesComponent } from './components/store/sales/sales.component';
 import { DetailedItemComponent } from './components/warehouse/detailed-item/detailed-item.component';
 import { DialogComponent } from './components/shared/dialog.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { DialogComponent } from './components/shared/dialog.component';
     SalesComponent,
     DetailedItemComponent,
     DialogComponent,
+    AdminDashboardComponent,
 
   ],
   imports: [
@@ -61,7 +63,7 @@ import { DialogComponent } from './components/shared/dialog.component';
     LayoutModule,
     MaterialBundleModule,
     CoreModule,
-    ChartsModule
+    ChartsModule,
   ],
   entryComponents: [BottomSheetComponent, DialogComponent],
   providers: [],

@@ -24,7 +24,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
   
   .pace .pace-progress {
-    background: #607d8b;
+    background: #fff;
     position: fixed;
     z-index: 2000;
     top: 0;
@@ -39,7 +39,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     right: 0px;
     width: 100px;
     height: 100%;
-    box-shadow: 0 0 10px #607d8b, 0 0 5px #607d8b;
+    box-shadow: 0 0 10px #fff, 0 0 5px #fff;
     opacity: 1.0;
     -webkit-transform: rotate(3deg) translate(0px, -4px);
     -moz-transform: rotate(3deg) translate(0px, -4px);
@@ -57,8 +57,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     width: 14px;
     height: 14px;
     border: solid 2px transparent;
-    border-top-color: #607d8b;
-    border-left-color: #607d8b;
+    border-top-color: #fff;
+    border-left-color: #fff;
     border-radius: 10px;
     -webkit-animation: pace-spinner 400ms linear infinite;
     -moz-animation: pace-spinner 400ms linear infinite;
