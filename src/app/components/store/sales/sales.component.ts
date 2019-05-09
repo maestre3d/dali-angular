@@ -11,19 +11,20 @@ export interface PeriodicElement {
   position: number;
   weight: number;
   symbol: string;
+  quantity: number;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', quantity: 0},
+  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He', quantity: 0},
+  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li', quantity: 0},
+  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be', quantity: 0},
+  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B', quantity: 0},
+  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C', quantity: 0},
+  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N', quantity: 0},
+  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O', quantity: 0},
+  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F', quantity: 0},
+  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne', quantity: 0},
 ];
 
 @Component({
@@ -39,7 +40,7 @@ export class SalesComponent implements OnInit {
   secondFormGroup: FormGroup;
 
   // Table
-  displayedColumns: string[] = ['select', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['select', 'name', 'weight', 'symbol', 'quantity'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -103,6 +104,17 @@ export class SalesComponent implements OnInit {
 
   getItems() {
     console.log(this.selection.selected);
+  }
+
+  validateItems(): boolean {
+    if ( this.selection.selected.length === 0 ) {return false;}
+    let res: boolean;
+
+    this.selection.selected.forEach(element => {
+      res = (element.quantity > 0) ? true : false;
+    });
+    console.log(res);
+    return res;
   }
 
 }

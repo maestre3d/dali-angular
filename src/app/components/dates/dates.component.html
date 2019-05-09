@@ -1,5 +1,5 @@
 <div class="container animated fadeIn fast">
-  <mat-tab-group color="accent">
+  <mat-tab-group color="accent" >
     <mat-tab label="Citas">
       <ng-template matTabContent>
         <div class="header">
@@ -10,38 +10,46 @@
         <div class="content animated bounceInUp slow">
           <div>
             <h3>Activo</h3>
-            <div class="card-container">
+            <div class="error-body animated fadeIn" *ngIf="errflag === true && loading === false || !active">
+              <mat-icon>notification_important</mat-icon>
+              <h2>No hay citas activas.</h2>
+            </div>
+            <div class="card-container" *ngIf="active">
               <mat-card class="card">
-                <mat-card-title>Luis Alonso Ruiz</mat-card-title>
-                <mat-card-subtitle style="display: flex; flex-flow:row wrap; align-items:center;">
-                  <div><span>Corte Cabello</span> - 10:30 AM</div>
-                  <div><mat-icon style="font-size: 19px;">watch_later</mat-icon></div>
+                <mat-card-title>{{active.costumer}}</mat-card-title>
+                <mat-card-subtitle style="display: flex; flex-flow:row wrap; align-items:flex-start;">
+                  <div><span *ngFor="let service of active.services">{{service.name}} - </span> {{active.time | date:'medium'}}</div>
+                  <div style="margin-left: 5px;"><mat-icon style="font-size: 19px;">watch_later</mat-icon></div>
                 </mat-card-subtitle>
                 <mat-card-content class="card-content">
                 </mat-card-content>
                 <mat-card-actions style="display: flex; justify-content:flex-end;">
-                  <button mat-raised-button>CANCELAR</button>
-                  <button mat-raised-button color="accent" class="teal-btn" (click)="openDialog('Finalizar Cita', '¿Desea Finalizar la cita?')" ><mat-icon>done_all</mat-icon> FINALIZAR</button>
+                  <button mat-raised-button (click)="deleteBook(active._id)">CANCELAR</button>
+                  <button mat-raised-button color="accent" class="teal-btn" (click)="finishBook(active._id)" ><mat-icon>done_all</mat-icon> FINALIZAR</button>
                 </mat-card-actions>
               </mat-card>
             </div>
           </div>
           <div>
+            <!-- TODO -->
             <h3>Pendientes</h3>
+            <div class="error-body animated fadeIn" *ngIf="errflag === true && loading === false || actives.length <= 0">
+              <mat-icon>notification_important</mat-icon>
+              <h2>No hay citas pendientes.</h2>
+            </div>
             <app-loading *ngIf="loading === true"></app-loading>
-            <div class="card-container">
-              
-              <mat-card class="card"  *ngFor="let book of appoints">
+            <div class="card-container" *ngIf="errflag === false && loading === false || actives.length > 0">
+              <mat-card class="card"  *ngFor="let book of actives">
                 <mat-card-title>{{book.costumer}}</mat-card-title>
-                <mat-card-subtitle style="display: flex; flex-flow:row wrap; align-items:center;">
-                  <div><span *ngFor="let service of book.services">{{service.name}} <span *ngIf="book.services.length > 1"> , </span></span> - {{book.time | date:'short'}}</div>
-                  <div><mat-icon style="font-size: 19px;">watch_later</mat-icon></div>
+                <mat-card-subtitle style="display: flex; flex-flow:row wrap; align-items:flex-start;">
+                  <div><span *ngFor="let service of book.services">  {{service.name}} -<span *ngIf="book.services.length > 1"></span></span>  {{book.time | date:'medium'}}</div>
+                  <div style="margin-left: 5px;"><mat-icon style="font-size: 19px;">watch_later</mat-icon></div>
                 </mat-card-subtitle>
                 <mat-card-content class="card-content">
                 </mat-card-content>
                 <mat-card-actions style="display: flex; justify-content:flex-end;">
                   <button mat-raised-button (click)="deleteBook(book._id)">CANCELAR</button>
-                  <button mat-raised-button><mat-icon matPreffix>arrow_right_alt</mat-icon> COMENZAR</button>
+                  <button mat-raised-button (click)="activateBook(book._id)"><mat-icon matPreffix>arrow_right_alt</mat-icon> COMENZAR</button>
                 </mat-card-actions>
               </mat-card>
             </div>
@@ -53,11 +61,14 @@
       <ng-template matTabContent>
         <div class="header">
           <h1>Historial</h1>
-          <div>
-          </div>
         </div>
         <mat-divider [vertical]="false" style="margin-bottom: 10px;"></mat-divider>
-        <div class="tb-1">
+        <app-loading *ngIf="loading === true"></app-loading>
+        <div class="error-body animated fadeIn" *ngIf="errflag === true && loading === false">
+          <mat-icon>warning</mat-icon>
+          <h2>No hay historial.</h2>
+        </div>
+        <div *ngIf="errflag === false" class="tb-1">
             <mat-form-field color="accent" style="width: 50%;" >
               <mat-label>Buscar</mat-label>
               <input matInput (keyup)="applyFilter(value)" placeholder="Buscar cita(s)..." [(ngModel)]="value">
@@ -66,10 +77,9 @@
               </button>
               <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
-          </div> 
-          <div class="mat-elevation-z8 animated bounceInUp slow">
+          </div>
+          <div *ngIf="errflag === false" class="mat-elevation-z8 animated bounceInUp slow">
             <table mat-table matSort [dataSource]="dataSource">
-          
               <!-- Name Column -->
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
@@ -79,7 +89,7 @@
               <!-- Services Column -->
               <ng-container matColumnDef="services">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Servicios </th>
-                <td mat-cell *matCellDef="let element"> <span *ngFor="let service of element.services">{{service.name}}, </span> </td>
+                <td mat-cell *matCellDef="let element"> <span *ngFor="let service of element.services">{{service.name}}<br></span> </td>
               </ng-container>
       
               <!-- Cost Column -->

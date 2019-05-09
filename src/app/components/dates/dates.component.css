@@ -61,3 +61,13 @@ table {
     justify-content: space-between;
     margin-bottom: 20px;
   }
+
+  .error-body{
+    color: #e0e0e0;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .error-body > mat-icon {
+    font-size: 28px;
+  }

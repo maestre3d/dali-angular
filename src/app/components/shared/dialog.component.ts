@@ -14,12 +14,10 @@ export class DialogComponent {
       @Inject(MAT_DIALOG_DATA) public data: any) {}
 
       onOkClick(): void {
-        this.data.flag = true;
-        this.dialogRef.close();
+        this.data.response = '1';
       }
 
-    onNoClick(): void {
-        this.data.flag = false;
-        this.dialogRef.close();
-    }
+      onNoClick(): void {
+          this.dialogRef.close();
+      }
 }

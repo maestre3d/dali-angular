@@ -43,8 +43,8 @@
           <div class="content" style=" margin-bottom: 25px;">
             <div class="form-content">
               <h2>Seleccione los servicios</h2>
-              <div>
-                <mat-checkbox *ngFor="let service of services" [(ngModel)]="service.flag" color="primary" style="margin: 10px 25px;" [ngModelOptions]="{standalone: true}" >{{service.name}}</mat-checkbox>
+              <div style="display: flex; flex-flow: column wrap; align-items:flex-start; justify-content:center">
+                <mat-checkbox *ngFor="let service of services" [(ngModel)]="service.flag" color="primary" style="margin: 10px;" [ngModelOptions]="{standalone: true}" >{{service.name}}</mat-checkbox>
               </div>
             </div>
           </div>

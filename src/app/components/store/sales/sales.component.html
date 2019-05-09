@@ -79,6 +79,17 @@
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
                         <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
                       </ng-container>
+
+                      <!-- Quantity Column -->
+                      <ng-container matColumnDef="quantity">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+                        <td mat-cell *matCellDef="let element">
+                          <mat-form-field style="width: 60px;">
+                            <input matInput type="number" placeholder="Cantidad" min="0" [(ngModel)]="element.quantity" #quantity="ngModel" name="quantity" [ngModelOptions]="{standalone: true}">
+                            <mat-error *ngIf="quantity.invalid">Cantidad min: 1</mat-error>
+                          </mat-form-field>
+                        </td>
+                      </ng-container>
                     
                       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                       <tr mat-row *matRowDef="let row; columns: displayedColumns;"
@@ -105,7 +116,7 @@
           </div>
           <div>
             <button mat-button (click)="stepper.reset()">CANCELAR</button>
-            <button mat-raised-button color="primary" class="teal-btn" (click)="openSnackBar('Venta concretada correctamente.')">TERMINAR</button>
+            <button mat-raised-button color="primary" class="teal-btn" [disabled]="validateItems() === false" (click)="openSnackBar('Venta concretada correctamente.')">TERMINAR</button>
           </div>
         </mat-step>
       </mat-horizontal-stepper>

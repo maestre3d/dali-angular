@@ -65,8 +65,8 @@ export class UserService {
                     .pipe(map(data => data));
     }
 
-    getActiveBooks(username: string){
-        return this.getQuery(`/user/booking/${username}`)
+    getActiveBooks(id: string) {
+        return this.getQuery(`/user/booking/${id}`)
                     .pipe(map(data => data));
     }
 

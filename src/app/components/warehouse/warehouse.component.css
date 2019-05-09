@@ -32,3 +32,13 @@ table {
     justify-content: space-between;
     margin-bottom: 20px;
   }
+
+  .error-body{
+    color: red;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .error-body > mat-icon {
+    font-size: 28px;
+  }

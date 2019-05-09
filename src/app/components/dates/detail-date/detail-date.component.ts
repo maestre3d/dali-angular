@@ -110,7 +110,7 @@ export class DetailDateComponent implements OnInit {
     // console.log(params);
 
     this._Services.bookDate(params).subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       this.openSnackBar('Cita agendada correctamente.');
       this.router.navigate(['/dates']);
     }, err => {

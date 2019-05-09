@@ -13,7 +13,7 @@ import { DetailedItemComponent } from './components/warehouse/detailed-item/deta
 export const ROUTES: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'warehouse', component: WarehouseComponent },
-    { path: 'warehouse/item', component: DetailedItemComponent },
+    { path: 'warehouse/:id', component: DetailedItemComponent },
     { path: 'config', component: ConfigComponent },
     { path: 'login', component: LoginComponent },
     { path: 'dates', component: DatesComponent },

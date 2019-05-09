@@ -1,25 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   hide: boolean;
   userInput: string;
   passInput: string;
   token: string;
   identity: User;
+  sub: Subscription;
 
   constructor(private snackBar: MatSnackBar, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.hide = false;
+  }
+
+  ngOnDestroy() {
+    if (this.sub) { this.sub.unsubscribe(); }
   }
 
   getLogged() {
@@ -29,7 +35,7 @@ export class LoginComponent implements OnInit {
       getToken: null
     };
 
-    this.userService.logIn(params).subscribe( (data: any) => {
+    this.sub = this.userService.logIn(params).subscribe( (data: any) => {
 
       this.identity = data.user;
       this.openSnackBar(`¡Bienvenido ${this.identity.name} ${this.identity.surname}!`);
@@ -46,7 +52,7 @@ export class LoginComponent implements OnInit {
           window.location.reload();
         }
       },
-      error =>{
+      error => {
         if (error) {
           console.log(error.error.message);
           this.openSnackBar(error.error.message);
